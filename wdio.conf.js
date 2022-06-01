@@ -51,31 +51,13 @@ exports.config = {
     // https://saucelabs.com/platform/platform-configurator
     //
     capabilities: [
-        
-        /*
-        {
-        // maxInstances can get overwritten per capability. So if you have an in-house Selenium
-        // grid with only 5 firefox instances available you can make sure that not more than
-        // 5 instances get started at a time.
-        maxInstances: 5,
-        //
-        browserName: 'chrome',
-        acceptInsecureCerts: true
-        // If outputDir is provided WebdriverIO can capture driver session logs
-        // it is possible to configure which logTypes to include/exclude.
-        // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
-        // excludeDriverLogs: ['bugreport', 'server'],
-    }*/
 
     {
-
         platformName: "ios",
         "appium:platformVersion": "15.5",
         "appium:deviceName": "iPhone 13",
         "appium:automationName": "XCUITest",
         "appium:app": "/Users/kevinzagala1/Documents/GitHub/qaautomation_appium/ios/testapp/FanaticsSportsbook.app",
-
-
     }
 ],
     //
@@ -125,7 +107,16 @@ exports.config = {
     // Services take over a specific job you don't want to take care of. They enhance
     // your test setup with almost no effort. Unlike plugins, they don't add new
     // commands. Instead, they hook themselves up into the test process.
-    services: ['appium'],
+    services: [
+        ['appium', {
+        command : 'appium',
+            args: {
+              address: 'localhost',
+              port: 4723
+            },
+            logPath: './'
+    }]
+],
     
     // Framework you want to run your specs with.
     // The following are supported: Mocha, Jasmine, and Cucumber
@@ -305,8 +296,6 @@ exports.config = {
     */
     // onReload: function(oldSessionId, newSessionId) {
     // }
-
-    appium: { command: 'appium' }
 
 
 }
